@@ -151,32 +151,32 @@ const SYSTEM_BASIC_INFORMATION = new ctypes.StructType("SYSTEM_BASIC_INFORMATION
   {'NumberOfProcessors': ctypes.char} ]);
 
 const OSVERSIONINFO = new ctypes.StructType("OSVERSIONINFO", [
-  {'dwOSVersionInfoSize': ctypes.uint32_t},
-  {'dwMajorVersion': ctypes.uint32_t},
-  {'dwMinorVersion': ctypes.uint32_t},
-  {'dwBuildNumber': ctypes.uint32_t},
-  {'dwPlatformId': ctypes.uint32_t},
-  {'szCSDVersion': ctypes.jschar.array(128)} ]);
+  {'dwOSVersionInfoSize': ctypes.uint32_t},//DWORD 
+  {'dwMajorVersion': ctypes.uint32_t},//DWORD 
+  {'dwMinorVersion': ctypes.uint32_t},//DWORD 
+  {'dwBuildNumber': ctypes.uint32_t},//DWORD 
+  {'dwPlatformId': ctypes.uint32_t}, //DWORD 
+  {'szCSDVersion': ctypes.jschar.array(128)} ]); //TCHAR szCSDVersion[128];
 
 const SERVICE_STATUS_PROCESS = new ctypes.StructType("SERVICE_STATUS_PROCESS", [
-  {'dwServiceType': ctypes.uint32_t},
-  {'dwCurrentState': ctypes.uint32_t},
-  {'dwControlsAccepted': ctypes.uint32_t},
-  {'dwWin32ExitCode': ctypes.uint32_t},
-  {'dwServiceSpecificExitCode': ctypes.uint32_t},
-  {'dwCheckPoint': ctypes.uint32_t},
-  {'dwWaitHint': ctypes.uint32_t},
-  {'dwProcessId': ctypes.uint32_t},
-  {'dwServiceFlags': ctypes.uint32_t} ]);
+  {'dwServiceType': ctypes.uint32_t},// DWORD 
+  {'dwCurrentState': ctypes.uint32_t},// DWORD 
+  {'dwControlsAccepted': ctypes.uint32_t},// DWORD 
+  {'dwWin32ExitCode': ctypes.uint32_t},// DWORD 
+  {'dwServiceSpecificExitCode': ctypes.uint32_t},// DWORD 
+  {'dwCheckPoint': ctypes.uint32_t},// DWORD 
+  {'dwWaitHint': ctypes.uint32_t},// DWORD 
+  {'dwProcessId': ctypes.uint32_t},// DWORD 
+  {'dwServiceFlags': ctypes.uint32_t} ]);// DWORD 
 
 const ENUM_SERVICE_STATUS_PROCESS = new ctypes.StructType("ENUM_SERVICE_STATUS_PROCESS", [
-  {'lpServiceName': ctypes.jschar.ptr},
-  {'lpDisplayName': ctypes.jschar.ptr},
-  {'ServiceStatusProcess': SERVICE_STATUS_PROCESS} ]);
+  {'lpServiceName': ctypes.jschar.ptr}, //LPTSTR
+  {'lpDisplayName': ctypes.jschar.ptr},//LPTSTR
+  {'ServiceStatusProcess': SERVICE_STATUS_PROCESS} ]);//SERVICE_STATUS_PROCESS
 
 const LANGANDCODEPAGE = new ctypes.StructType("LANGANDCODEPAGE", [
-  {'wLanguage': ctypes.uint16_t},
-  {'wCodePage': ctypes.uint16_t} ]);
+  {'wLanguage': ctypes.uint16_t}, //WORD 
+  {'wCodePage': ctypes.uint16_t} ]);//WORD 
 
 const NtQuerySystemInformation = lib_ntdll.declare("NtQuerySystemInformation", 
   ctypes.winapi_abi,
@@ -226,10 +226,10 @@ const EnumServicesStatusExW = lib_advapi32.declare("EnumServicesStatusExW",
 
 const OpenSCManagerW = lib_advapi32.declare("OpenSCManagerW", 
   ctypes.winapi_abi,
-  ctypes.void_t.ptr, // return
-  ctypes.jschar.ptr, // lpMachineName
-  ctypes.jschar.ptr, // lpDatabaseName
-  ctypes.uint32_t); // dwDesiredAccess
+  ctypes.void_t.ptr, // return //SC_HANDLE
+  ctypes.jschar.ptr, // lpMachineName //LPCTSTR
+  ctypes.jschar.ptr, // lpDatabaseName //LPCTSTR
+  ctypes.uint32_t); // dwDesiredAccess //DWORD 
 
 const CloseServiceHandle = lib_advapi32.declare("CloseServiceHandle", 
   ctypes.winapi_abi,
